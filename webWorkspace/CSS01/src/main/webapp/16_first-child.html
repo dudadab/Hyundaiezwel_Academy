@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>first-child 선택자</title>
+	<style type="text/css">
+	#content div { /*content의 모든 자손 div*/
+		width:400px;
+		height:50px;
+		border:solid 1px black;
+	}
+	
+	/*content 내의 첫번째 div를 선택:첫번째 객체의미 선택자 #content 태그:first-child -> 앞뒤로 공백이 있으면 안됨*/
+	#content div:first-child {background:purple;} 
+	#content div:first-child + div {background:green;}
+	/*#content div:first-child + div + div {background:red;} /*+div를 계속 적용할 수 있음*/
+	#content div:nth-child(3) {background:skyblue;} 
+	#content div:nth-child(4) {background:indigo;}
+	#content div:nth-child(1) {background:pink;}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+</body>
+</html>
+
+

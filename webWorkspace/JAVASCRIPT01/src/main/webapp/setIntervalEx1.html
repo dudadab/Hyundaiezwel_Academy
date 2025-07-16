@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">	
+			let count = 1;
+		
+			function start(){
+				alert("이미지 10개 출력");
+				timerID = setInterval(showImg, 1000);
+			}
+		
+			function showImg(){
+				if(count <= 10){
+					if(count % 2 == 1){
+						document.write("<img src='image/apple.png'>");
+					} 
+					else {
+						document.write("<img src='image/bomb.png'>");
+					}
+					count++;
+				}
+				else clearInterval(timerID);
+			}
+		</script>
+	</head>
+	<body onLoad="start()">
+	
+	</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer ></script>
+		<link rel="stylesheet" type="text/css" href="css/common.css">	
+        <link rel="stylesheet" type="text/css" href="css/index.css">	
+        <link rel="stylesheet" type="text/css" href="css/menu.css">
+        <link rel="stylesheet" type="text/css" href="css/slideShow.css">
+        <link rel="stylesheet" type="text/css" href="css/tabMenu.css">
+        <link rel="stylesheet" type="text/css" href="css/product.css">
+        <script src="js/subMenu.js" defer></script>
+        <script src="js/slideShow.js" defer></script>
+        <script src="js/tabMenu.js" defer></script>
+        <script src="js/index.js" defer></script>
+	</head>
+	<body>
+        <div id="wrap">
+            <header> <!-- 로고, 회원메뉴(topMenu) -->
+                <div id="headerBox">
+                    <div id="logoBox"><img src="image/logo.png" id="logoImg"></div>
+                    <div id="topMenuBox">로그인 이벤트 장바구니 고객센터 회원가입</div>
+                </div>
+            </header>
+            <nav> <!-- 상품관련 메뉴 -->
+                <div id="mainMenuBox">
+                    <ul id="menuItem">
+                        <li><a href="#">special</a></li>
+                        <li><a href="#">메뉴항목1</a></li>
+                        <li><a href="#">메뉴항목2</a></li>
+                        <li><a href="#">메뉴항목3</a></li>
+                        <li><a href="#">메뉴항목4</a></li>
+                        <li><a href="#" id="showAllMenu">전체보기 🔽</a></li>
+                    </ul>
+                </div>
+                <div id="subMenuBox">
+                    <div class="subMenuItem" id="subMenuItem1">
+                        <ul>
+                            <li><a href="#">subMuenuItem1-1</a></li>
+                            <li><a href="#">subMuenuItem1-2</a></li>
+                            <li><a href="#">subMuenuItem1-3</a></li>
+                            <li><a href="#">subMuenuItem1-4</a></li>
+                        </ul>
+                    </div>
+                    <div class="subMenuItem" id="subMenuItem2">
+                        <ul>
+                            <li><a href="#">subMuenuItem2-1</a></li>
+                            <li><a href="#">subMuenuItem2-2</a></li>
+                            <li><a href="#">subMuenuItem2-3</a></li>
+                            <li><a href="#">subMuenuItem2-4</a></li>
+                        </ul>
+                    </div>
+                    <div class="subMenuItem" id="subMenuItem3">
+                        <ul>
+                            <li><a href="#">subMuenuItem3-1</a></li>
+                            <li><a href="#">subMuenuItem3-2</a></li>
+                            <li><a href="#">subMuenuItem3-3</a></li>
+                            <li><a href="#">subMuenuItem3-4</a></li>
+                        </ul>
+                    </div>
+                    <div class="subMenuItem" id="subMenuItem4">
+                        <ul>
+                            <li><a href="#">subMuenuItem4-1</a></li>
+                            <li><a href="#">subMuenuItem4-2</a></li>
+                            <li><a href="#">subMuenuItem4-3</a></li>
+                            <li><a href="#">subMuenuItem4-4</a></li>
+                        </ul>
+                    </div>
+                    <div class="subMenuItem" id="subMenuItem5">
+                        <ul>
+                            <li><a href="#">subMuenuItem5-1</a></li>
+                            <li><a href="#">subMuenuItem5-2</a></li>
+                            <li><a href="#">subMuenuItem5-3</a></li>
+                            <li><a href="#">subMuenuItem5-4</a></li>
+                        </ul>
+                    </div>
+                    <div class="subMenuItem" id="subMenuItem6">
+                        <ul>
+                            <li><a href="#">subMuenuItem6-1</a></li>
+                            <li><a href="#">subMuenuItem6-2</a></li>
+                            <li><a href="#">subMuenuItem6-3</a></li>
+                            <li><a href="#">subMuenuItem6-4</a></li>
+                        </ul>
+                    </div>
+                </div> <!-- 서브메뉴박스 끝 -->
+            </nav> <!-- menu 끝 -->
+            <section><!-- 컨텐츠 -->
+                <article id="slideShow"> <!-- 슬라이드 쇼 --> 
+
+                    <div id="prevNextButtonBox">
+                        <img id="prevButton" src="image/prevButton.png">
+                        <img id="nextButton" src="image/nextButton.png">
+                    </div>
+
+                    <div id="slideShowBox"> <!-- 슬라이드 보이는 영역 -->
+                        <div id="slidePanel">
+                            <img src="image/slide_img_01.jpg" class="slideImg">
+                            <img src="image/slide_img_02.jpg" class="slideImg"> 
+                            <img src="image/slide_img_03.jpg" class="slideImg">
+                            <img src="image/slide_img_04.jpg" class="slideImg">
+                            <img src="image/slide_img_05.jpg" class="slideImg">
+                        </div> <!-- 슬라이드 패널 끝 -->
+                    </div> <!-- 슬라이드 쇼 박스 끝 -->
+
+                    <div id="controlPanel">
+                        <img src="image/controlButton1.png" class="controlButton">
+                        <img src="image/controlButton1.png" class="controlButton">
+                        <img src="image/controlButton1.png" class="controlButton">
+                        <img src="image/controlButton1.png" class="controlButton">
+                        <img src="image/controlButton1.png" class="controlButton">         
+                    </div>
+
+                </article>
+                <article id="content1"> <!-- 탭컨텐츠 -->
+                    <div id="tabMenuBox">
+                        <div id="tabMenu">
+                            <ul>
+                                <li><img src="image/tab1.png"></li>
+                                <li><img src="image/tab2.png"></li>
+                                <li><img src="image/tab3.png"></li>
+                                <li><img src="image/tab4.png"></li>
+                            </ul>
+                        </div>
+                        <div id="tabContent">
+                            <div><a href="#"><img src="image/tab_img_01.jpg"></a></div>
+                            <div><a href="#"><img src="image/tab_img_02.jpg"></a></div>
+                            <div><a href="#"><img src="image/tab_img_03.jpg"></a></div>
+                            <div><a href="#"><img src="image/tab_img_04.jpg"></a></div>
+                        </div>
+                    </div>
+                </article>
+                <article id="content2"> <!-- 베스트 상품 -->
+                    <div id="productBox">
+                    <h3>베스트 상품</h3>
+                    <div class="product">
+                        <div><a href="#"><img src="image/prd01.jpg"></a></div>
+                        <div><a href="#"><img src="image/prd02.jpg"></a></div>
+                        <div><a href="#"><img src="image/prd03.jpg"></a></div>
+                    </div>
+                    <div class="product">
+                        <div><a href="#"><img src="image/prd04.jpg"></a></div>
+                        <div><a href="#"><img src="image/prd05.jpg"></a></div>
+                        <div><a href="#"><img src="image/prd06.jpg"></a></div>
+                    </div>
+                </div>
+                </article>
+            </section>
+            <footer>
+                <div id="footerBox">
+                    <div id="bottomMenuBox">
+                        <ul id="bottomMenuItem">
+                            <li><a href="#">회사소개</a></li>
+                            <li><a href="#">이용약관</a></li>
+                            <li><a href="#">개인정보 처리방침</a></li>
+                            <li><a href="#">전자금융 거래약관</a></li>
+                            <li><a href="#">보안센터</a></li>
+                            <li><a href="#">채용정보</a></li>
+                        </ul>
+                    </div>
+                    <div id="companyInfo"><img src="image/footer.png"></div>
+                    <div id="moveToTopBox"><img src="image/moveToTop.png" id="moveToTop"></div>
+                </div>
+            </footer>
+        </div> <!-- wrap 끝 -->
+	</body>
+</html>

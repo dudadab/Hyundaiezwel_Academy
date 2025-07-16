@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>양수, 음수, 0</title>
+		<script type="text/javascript">	
+			//숫자 10개를 입력받아서 양수, 음수, 0의 개수를 출력하는 프로그램 작성
+			let positiveCount = 0;
+			let negativeCount = 0;
+			let zeroCount = 0;
+			
+			for(let i=1; i<=10; i++){
+				let inputNum = prompt("숫자 1 입력 : ")
+				switch(true){
+				case inputNum > 0 : 
+					positiveCount++;
+					break;
+				case inputNum < 0 : 
+					negativeCount++;
+					break;
+				default:
+				      zeroCount++;
+				      break;
+				}
+				
+			}
+			document.write("양수의 개수 : " + positiveCount); 
+			document.write("<br>음수의 개수 : " + negativeCount);
+			document.write("<br>0의 개수 : " + zeroCount);
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>

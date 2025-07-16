@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">	
+			//배열 깊은 복사
+			//JSON객체 기능을 활용
+			//JSON.parse() -> 구문분석
+			//JSON.stringify() -> JSON문자열로 변환
+			
+			//배열 생성
+			let arr=[1,2,3];
+			let arrCopy = JSON.parse(JSON.stringify(arr));
+			
+			console.log("원본 : ", arr);
+			console.log("복사본 : ", arrCopy);
+			
+			console.log(arr == arrCopy); 
+			
+			console.log("변경 후");
+			arr[0]=100; 
+			console.log("원본 : ", arr);
+			console.log("복사본 : ", arrCopy);
+			
+			
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>

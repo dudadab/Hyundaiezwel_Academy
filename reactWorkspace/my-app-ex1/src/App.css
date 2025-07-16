@@ -1,0 +1,24 @@
+div {
+  text-align: center;
+}
+
+h2{
+  font-style: italic;
+  text-decoration: underline;
+}
+
+#Content{
+  background:skyblue
+}
+
+#Header{
+  background:lightgreen
+}
+
+#Nav{
+  background:lightyellow
+}
+
+#Footer{
+  background:lightgray
+}

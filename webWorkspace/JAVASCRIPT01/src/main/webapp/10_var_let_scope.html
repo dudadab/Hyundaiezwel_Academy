@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>var와 let : scope 차이</title>
+		<script type="text/javascript">
+			function test() {
+				var x=10;
+				if(x==10){
+					var a = 100; //var로 선언한 지역 변수, 영역 함수의 {}가 영역
+				}
+				console.log(a);
+				
+			}
+			
+			test();
+			
+			function test2() {
+				let x=10;
+				if(x==10){
+					let a = 200; //let을 활용 명시적으로 지역변수 생성 -> let의 영역은 {}이므로 if문의 {}가 a 변수의 영역
+				}
+				console.log(a); //a변수가 if문의 }에 의해 삭제 되므로 사용 불가 - 오류 발생
+			}
+			
+			test2();
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

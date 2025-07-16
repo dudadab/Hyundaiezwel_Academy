@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>함수 매개변수</title>
+		<script type="text/javascript">    
+			//매개변수가 있고 반환값이 있는 함수
+			function calInterest(deposit,rate){ //매개변수는 지역변수
+				let interest = deposit * rate / 100; //이자율이므로 퍼센트로 전달받음
+				return interest;
+			}
+			
+			function input() { //두 값(예금액과 이자율)을 입력받아 이자를 계산해주는 calInterest 함수 호출해서 계산된 이자를 반환 받은 후 출력
+				let dep = parseInt(prompt("예금액 입력"));
+				let rat = Number(prompt("이자율 입력"))
+				//이자를 계산해주는 함수 호출 - 인수 전달
+				document.write("예금이자 : " + calInterest(dep,rat));
+			}		
+			input();
+        </script>    
+	</head>
+	<body>
+	
+	</body>
+</html>

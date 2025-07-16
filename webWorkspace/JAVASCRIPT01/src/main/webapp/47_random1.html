@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>랜덤함수 사용</title>
+		<script type="text/javascript">	
+			//랜덤값(난수) 발생 예시
+			for(let i=1; i<=10; i++){
+				let num = Math.random(); //0.0x ~ 0.9x
+				document.write(num + "<br>");
+			}
+			
+			document.write("<hr>");
+			
+			for(let i=1; i<=10; i++){
+				let num = Math.random() * 10; // 0~9 범위의 정수가 존재
+				document.write(num + "<br>");
+			}
+			
+			document.write("<hr>");
+			
+			for(let i=1; i<=10; i++){
+				let num = 1 + Math.floor(Math.random() * 10); // 0~9 범위의 정수가 존재 - 버림함수 floor() 사용 => +1을 진행 1~10까지의 범위 구성
+				document.write(num + "<br>");
+			}
+			
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>

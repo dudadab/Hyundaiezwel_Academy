@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>confirm 함수 이용한 데이터 입력</title>
+<script>
+	let isStudent; //confirm 창에 의해 전달된 값을 저장하기 위해 생성한 변수
+	isStudent=confirm("당신은 학생입니까?"); //브라우저에 의해 사용자가 선택한 버튼에 따라 true/false 값이 전달 -> 저장(변수에 저장)
+	
+	if(isStudent){
+		result="학생 입니다.";
+		discount="50%";
+	}else{
+		result="학생이 아닙니다.";
+		discount="없음";
+	}
+	
+	document.write("결과 : " +result + "<br>"); //write(문자열) -> 규칙, + 연산자가 문자열 + 문자열 로 사용되면 문자열 결합이 진행됨
+	document.write("할인율 : " +discount);
+</script>
+</head>
+<body>
+	<h1>본문에서 출력</h1>
+</body>
+</html>

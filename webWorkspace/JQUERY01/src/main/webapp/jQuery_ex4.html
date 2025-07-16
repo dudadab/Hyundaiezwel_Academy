@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<style>
+		.section {
+            background-color: lightgray;      
+            padding : 15px; 
+        }
+        
+        </style>
+		<script src="jquery-3.7.1.min.js"></script>
+		<script type="text/javascript">	
+			$(document).ready(function() {
+				$('.subPanel').hide();
+				$('.section').click(function(){
+					$(this).next('.subPanel').slideToggle();
+			});
+			});
+		</script>
+	</head>
+	<body>	
+        <div>
+       		<div class="section">Section 1</div>
+        	<div class="subPanel">
+           		첫 번째 숨겨진 내용 <br> 수정 가능
+        	</div>
+
+        	<div class="section">Section 2</div>
+        	<div class="subPanel">
+           		두 번째 숨겨진 내용 <br> 수정 가능
+        	</div>
+        	<div class="section">Section 3</div>
+        	<div class="subPanel">
+            	세 번째 숨겨진 내용 <br> 수정 가능
+        	</div>
+        </div>
+	</body>
+</html>

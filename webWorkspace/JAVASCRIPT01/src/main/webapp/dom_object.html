@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="jquery-3.7.1min.js"></script>
+		<script type="text/javascript">	
+		/*  //script 코드가 요소 생성 전 실행되버림
+			let box = document.getElementById('box'); //태그의 id 속성값이 box인 태그를 찾아서 참조값을 반환해줌 - 현재는 반환값 없음
+			box.innerHTML="변경"; //현재 위치가 body 태그도 생성되기 전 시점 */
+		</script>
+	</head>
+	<body>
+		<div id="box">box</div>
+		<script type="text/javascript">	
+			//script 코드가 요소 생성 전 실행되버림
+			let box = document.getElementById('box'); //태그의 id 속성값이 box인 태그를 찾아서 참조값을 반환해줌 - 현재는 반환값 없음
+			box.innerHTML="변경"; //id값이 box인 div 태그가 생성된 이후이므로 반환된 참조값을 활용해서 태그 속성 변경 가능
+		</script>
+	</body>
+</html>

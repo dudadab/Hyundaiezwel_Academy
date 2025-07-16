@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">	
+			let inputId = prompt("아이디 입력", "아이디를 입력해주세요.");
+			let inputPwd = prompt("비밀번호 입력", "비밀번호를 입력해주세요.");
+			
+			const id = "abcd", pwd = "1234";
+			
+			if(id==inputId && pwd==inputPwd){
+				alert("abcd님 반갑습니다.");
+				let inputcapital = prompt("대한민국의 수도는?");
+				if(inputcapital=="서울"){
+					document.write("정답입니다.");
+				}else document.write("오답입니다.");
+			}else alert("아아디와 비밀번호가 틀렸습니다.");
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>
