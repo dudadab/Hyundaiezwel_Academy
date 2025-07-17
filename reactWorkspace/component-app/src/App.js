@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Subject from './components/Subject';
 import Content from './components/Content';
@@ -36,13 +35,13 @@ function Article(){
 function App() {
   return (
     <div className="App">
-      <Header/> {/* 컴포넌트 추가, 사용자 정의 태그 추가 */}
+      <Header title='리액트'/> {/* 컴포넌트 추가, 사용자 정의 태그 추가 */}
       <header></header> {/* 일반 html 태그 사용 */}
       <Nav/>
       <Article/>
-      <Subject/>
+      <Subject/> 
       <Content/>
-      <Nav2/>
+      <Nav2/> 
     </div>
   );
 }
