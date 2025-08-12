@@ -37,10 +37,19 @@ WHERE CLIENTNO = ( -- 서브쿼리
 -- 2. BOOKSALE 테이블에서 1에서 찾은 CLIENTNO에 해당되는 주문의 주문일/주문수량 조회
 SELECT BSDATE, BSQTY
 FROM BOOKSALE
-WHERE CLIENTNO = (SELECT CLIENTNO
+WHERE CLIENTNO = ( -- 단일행 반환
+                  SELECT CLIENTNO
                   FROM CLIENT
                   WHERE CLIENTNAME='호날두'
                   );
+                  
+-- 고객 호날두가 주문한 총 주문수량 
+SELECT SUM(BSQTY) AS 총주문수량
+FROM BOOKSALE
+WHERE CLIENTNO = ( -- 단일행 반환
+                  SELECT CLIENTNO
+                  FROM CLIENT
+                  WHERE CLIENTNAME='호날두');
                   
 -- 가장 비싼 도서의 도서명과 가격 출력 
 SELECT BOOKPRICE 
@@ -81,9 +90,214 @@ FROM CLIENT
 WHERE CLIENTNO IN ('3','7','2',...);
 */
 
+-- 도서를 구매한적이 있는 고객의 고객명, 주소  조회
+-- 1. BBOKSALE의 고객정보(CLIENTNO)를 조회
+-- 2. CLIENT테이블에서 조회된 CLIENTNO에 해당되는 고객 레코드만 추출한 후에 필요 컬럼 추출
 SELECT CLIENTNAME, CLIENTADDRESS
  FROM CLIENT
  WHERE CLIENTNO IN (
                     SELECT CLIENTNO
                     FROM BOOKSALE
                     );
+                    
+-- 도서를 한번도 구매한적이 없는 고객의 번호와 고객명 조회
+SELECT CLIENTNAME
+ FROM CLIENT
+ WHERE CLIENTNO NOT IN (
+                    SELECT CLIENTNO
+                    FROM BOOKSALE
+                    );
+                    
+--------------------------------------------------------------------------------
+
+-- 중첩 서브 쿼리
+-- 도서명이 '안드로이드 프로그래밍'인 도서를 구매한 고객의 고객명 출력
+-- 1. '안드로이드 프로그래밍' 도서의 도서번호 확인
+SELECT BOOKNO FROM BOOK WHERE BOOKNAME = '안드로이드 프로그래밍';
+-- 2. BOOKNO 1004번의 도서가 주문된적이 있다면 주문한 고객의 번호를 조회
+SELECT CLIENTNO
+FROM BOOKSALE
+WHERE BOOKNO = '1004';
+-- 3. 고객번호가 7번 8번인 고객들의 고객명을 조회
+SELECT CLIENTNAME
+FROM CLIENT
+WHERE CLIENTNO = '7' OR CLIENTNO = '8';
+
+SELECT CLIENTNO
+FROM BOOKSALE
+WHERE BOOKNO IN (
+                SELECT BOOKNO
+                FROM BOOK
+                WHERE BOOKNAME = (
+                                  SELECT BOOKNO
+                                  FROM BOOK
+                                  WHERE BOOKNAME = '안드로이드 프로그래밍')); 
+
+-- 단일행 서브쿼리의 조건 연산으로 IN 사용해도 무방        
+SELECT CLIENTNO
+FROM BOOKSALE
+WHERE BOOKNO IN (
+                SELECT BOOKNO
+                FROM BOOK
+                WHERE BOOKNAME IN (
+                                  SELECT BOOKNO
+                                  FROM BOOK
+                                  WHERE BOOKNAME = '안드로이드 프로그래밍')); 
+
+-- 서브쿼리를 사용했더라도 서브쿼리의 결과는 조건값이므로
+-- WHERE절 뒤에 모든 필요한 질의어 추가 가능
+SELECT CLIENTNO
+FROM BOOKSALE
+WHERE BOOKNO IN (
+                SELECT BOOKNO
+                FROM BOOK
+                WHERE BOOKNAME IN (
+                                  SELECT BOOKNO
+                                  FROM BOOK
+                                  WHERE BOOKNAME = '안드로이드 프로그래밍'))
+ORDER BY CLIENTNAME;
+
+--------------------------------------------------------------------------------
+
+-- 다중행 서브쿼리 연산자 (EXISTS, NOT EXISTS)
+-- EXISTS : 서브쿼리의 결과가 행을 반환하면 참이되는 연산자
+--          참조무결성에 대한 조건 검사가 병행되어야 함
+-- 상관서브쿼리연산이 가능 : 서브쿼리에서 메인쿼리의 컬럼을 사용 
+-- 도서를 구매한적이 있는 고객
+
+SELECT CLIENTNO, CLIENTNAME
+FROM CLIENT
+WHERE EXISTS (
+              SELECT CLIENTNO
+              FROM BOOKSALE
+              WHERE CLIENT.CLIENTNO = BOOKSALE.CLIENTNO
+              );
+
+-- 위 예시는 IN NOT IN 사용시와 같은 결과가 나옴
+
+-- NULL값을 포함하고 있는 컬럼 : IN VS EXISTS
+
+-- CLIENT 테이블의 CLIENTHOBBY 컬럼은 NULL값을 포함
+SELECT CLIENTHOOBY FROM CLIENT;
+
+-- 서브쿼리의 SELECT된 컬럼의 값이 BULL 포함 여부에 따라
+
+-- EXISTS : 서브쿼리 결과에 NULL 값 포함
+SELECT CLIENTHOBBY
+FROM CLIENT
+WHERE EXISTS (SELECT CLIENTHOBBY
+              FROM CLIENT);
+
+-- 서브쿼리 결과에 NULL값이 포함되지 않음
+-- 취미정보가 입력된(NULL아닌) 고객의 번호를 조회
+SELECT CLIENTNO
+FROM CLIENT
+WHERE CLIENTHOBBY IN (SELECT CLIENTHOBBY
+                      FROM CLIENT);
+        
+--------------------------------------------------------------------------------
+
+-- ALL/ANY
+-- 관계연산자와 같이 사용
+-- ALL : 서브쿼리의 결과 리스트가 조건검사대상이 되는 컬럼의 값과 비교할 때 모든 리스트의 모든값이 비교 연산에 대해 참이되는 경우 참
+-- 컬럼값이 10 > ALL(3,4,5,6) -> 참
+-- ANY : 서브쿼리의 결과 리스트가 조건검사대상이 되는 컬럼의 값과 비교할 때 리스트의 하나의 값이라도 비교 연산에 대해 참이되는 경우 참
+-- 컬럼값이 10 > ALL(11,12,5,13) -> 참
+
+-- 2번 고객이 주문한 도서의 최고 주문수량보다 더 많은 도서를 구입한 고객의 고객번호, 주문번호, 주문수량 출력
+
+-- 서브쿼리에서 MAX 집계함수 사용
+SELECT CLIENTNO, BSNO, BSQTY
+FROM BOOKSALE
+WHERE BSQTY >
+            (
+            SELECT MAX(BSQTY)
+            FROM BOOKSALE
+            WHERE CLIENTNO = '2'
+            );
+
+-- 메인쿼리에서 ALL 연산자를 사용
+SELECT CLIENTNO, BSNO, BSQTY
+FROM BOOKSALE
+WHERE BSQTY > ALL ( SELECT BSQTY
+                    FROM BOOKSALE
+                    WHERE CLIENTNO = '2'
+                    );
+-- 서브쿼리의 결과 리스트 중 최대값보다 큰 이라는 의미
+
+-- 2번 고객의 주문 내역들과 비교할 때 한번이라도 더 많은 주문을 한 적이 있는 고객(2번 고객이 3번 주문한 주문수량들 중 한번이라도 더 많이 주문한 고객의 고객번호)
+-- 주문수량을 조회
+-- 2번 고객의 최소 주문수량보다 많이 주문했던 고객의 주문정보
+
+-- 2번 고객을 포함한 모든 고객에 대해 2번 고객이 주문한 수량 중 최소주문수량보다 많이 주문한 주문정보
+
+SELECT CLIENTNO, BSNO, BSQTY
+FROM BOOKSALE
+WHERE BSQTY > ANY(SELECT BSQTY
+                  FROM BOOKSALE
+                  WHERE CLIENTNO = '2');
+                  
+SELECT CLIENTNO, BSNO, BSQTY
+FROM BOOKSALE
+WHERE BSQTY > ( SELECT MIN(BSQTY)
+                FROM BOOKSALE
+                WHERE CLIENTNO = '2');
+                
+-- 2번 고객이 주문한 최소 주문수량보다 많이 주문한 고객의 주문정보(2번고객은 제외)
+SELECT CLIENTNO, BSNO, BSQTY
+FROM BOOKSALE
+WHERE BSQTY > ANY(  SELECT BSQTY
+                    FROM BOOKSALE
+                    WHERE CLIENTNO = '2')
+                    AND CLIENTNO !=2;
+                    
+--------------------------------------------------------------------------------
+
+-- 스칼라 서브쿼리 EX
+-- SELECT 절에서 사용
+-- 서브쿼리의 결과로 단일열의 스칼라값으로 반환
+-- SELECT나 UPDATE에서 사용
+-- 고객별로 총 주문 수량
+-- 고객번호, 고객이름, 총주문수량
+
+-- BOOKSALE 테이블로 GROUP BY 고객이름 조회 불가
+SELECT CLIENTNO, SUM(BSQTY) AS "총주문수량"
+FROM BOOKSALE
+GROUP BY CLIENTNO
+ORDER BY CLIENTNO;
+
+-- 스칼라 서브쿼리 사용
+-- 상관서브 쿼리
+SELECT CLIENTNO,
+        (SELECT CLIENTNAME -- WHERE 절에는 비교되는 CLIENTNO가 GROUP 기준이므로 반환되는 CLIENTNAME은 그룹별ㄹ ㅗ반환됨
+         FROM CLIENT
+         WHERE CLIENT.CLIENTNO = BOOKSALE.CLIENTNO) AS 고객명,
+         SUM(BSQTY) AS "총주문수량"
+FROM BOOKSALE
+GROUP BY CLIENTNO
+ORDER BY CLIENTNO;
+
+-- DBMS VIEW 객체 제공
+-- 한개의 릴레이션에 모든 정보가 저장되지는 않음
+-- 필요한 정보를 얻기 위해 조인, SUBQUERY등을 진행하게 됨
+-- 많은 연산 수행이 동반
+-- 한번 연산 해 놓은 결과를 다시 동일한 데이터를 사용하려고 할 때 빠른 연산을 위해 연산의 순서를 기록해 놓은 것
+-- 물리적 의미는 위와 같지만 사용할 때는 릴레이션처럼 사용 가능
+-- 개발 중에 뷰가 필요한 경우 뷰를 생성하면
+-- 관리 문제나 트랜잭션등의 성능 문제가 발생할 수 있음
+-- 가상의 뷰, 인라인 뷰를 사용
+
+-- 인라인 뷰 : 반환되는 데이터는 다중행, 다중열이어도 상관없음 
+
+-- 도서가격이 25000원 이상인 도서 중 판매된 도서에 대해 도서별로 도서명, 도서가격, 총판매수량, 총판매액 조회
+
+SELECT BOOKNAME, BOOKPRICE, COUNT(8) AS 판매건수, SUM(BSQTY) AS 총판매수량, SUM(BOOKPRICE*BSQTY) AS 총판매액
+FROM BOOKSALE BS,
+    (SELECT BOOKNO, BOOKNAME, BOOKPRICE
+     FROM BOOK
+     WHERE BOOKPRICE > 25000) BOOK
+WHERE BOOK.BOOKNO = BS.BOOKNO
+GROUP BY BOOK.BOOKNO, BOOK.BOOKNAME, BOOKPRICE
+
+
+

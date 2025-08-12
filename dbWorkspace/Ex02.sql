@@ -26,7 +26,8 @@ GROUP BY pubNo
 ORDER BY "총 재고 수량" DESC;
 
 -- 5.도서판매 테이블에서 고객별로 ‘총 주문 수량’과 ‘총 주문 건수’ 출력. 단 주문 건수가 2이상인 고객만 해당
-SELECT clientNo, SUM(BSQTY) AS 총주문수량, COUNT(*) AS 총주문건수 FROM BOOKSALE
+SELECT clientNo, SUM(BSQTY) AS 총주문수량, COUNT(*) AS 총주문건수 
+FROM BOOKSALE
 GROUP BY clientNo
 HAVING COUNT(*) >= 2;
 
