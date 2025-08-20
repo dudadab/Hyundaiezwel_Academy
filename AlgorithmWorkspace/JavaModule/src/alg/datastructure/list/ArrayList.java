@@ -1,8 +1,9 @@
-package alg.datastructure;
+package alg.datastructure.list;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class ArrayList<E> {
+public class ArrayList<E> implements Iterable<E>{
 
     private Object[] elementData;
     private int size;
@@ -69,6 +70,28 @@ public class ArrayList<E> {
     @Override
     public String toString(){
         return "ArrayList [elementDate=" + Arrays.toString(elementData) + "]";
+    }
+
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Iterator<E> iterator(){
+        return new Iterator<E>(){
+            private int pointer = 0;
+
+            @Override
+            public boolean hasNext(){
+                return pointer < size ? true : false;
+            }
+
+            @Override
+            public E next(){
+                E res = (E) elementData[pointer];
+                pointer++;
+                return res;
+            }
+        };
+
     }
 
 }
