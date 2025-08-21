@@ -4,21 +4,20 @@ import alg.datastructure.list._LinkedList;
 import alg.datastructure.set._HashSet_P3;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 @SuppressWarnings("unchecked")
 public class _HashMap<K,V> {
 
     private int size = 0;
     private Object[] table;
-    private int arraySize;
+    private int arraySize = 10;
     private _HashSet_P3<Entry<K,V>> entrySet = new _HashSet_P3<>();
 
-    public _HashMap(){
+    public _HashMap() {
         this.table = new Object[arraySize];
     }
 
-    public _HashMap(int initialCapacity){
+    public _HashMap(int initialCapacity) {
         this.table = new Object[initialCapacity];
     }
 
@@ -51,12 +50,13 @@ public class _HashMap<K,V> {
             int i = row.indexOf(entry);
             entrySet.remove(entry);
 
-            V prevValue = row.get(row.indexOf(entry)).getValue();
+            V prevValue = row.get(i).getValue();
             row.remove(i);
             row.add(entry);
             entrySet.add(entry);
             return prevValue;
         }
+
         row.add(entry);
         entrySet.add(entry);
         return null;
@@ -71,7 +71,7 @@ public class _HashMap<K,V> {
             if(temp[i] == null) continue;
             _LinkedList<Entry<K,V>> row = (_LinkedList<Entry<K,V>>) temp[i];
 
-            for(Entry<K,V> e : row){
+            for (Entry<K,V> e : row) {
                 addEntry(e);
             }
         }
@@ -87,10 +87,10 @@ public class _HashMap<K,V> {
         return res;
     }
 
-    public V get(Object key){
+    public V get(Object key) {
         Entry<K, V> dummy = new Entry<K, V>((K)key, null);
         int index = hash(dummy);
-        _LinkedList<Entry<K,V>> row = (_LinkedList<Entry<K, V>>) table[index];
+        _LinkedList<Entry<K, V>> row = (_LinkedList<Entry<K, V>>) table[index];
 
         if(row == null) return null;
 
@@ -119,6 +119,12 @@ public class _HashMap<K,V> {
     public _HashSet_P3<Entry<K,V>> entrySet(){
         return this.entrySet;
     }
+
+
+
+
+
+
 
 
 }
