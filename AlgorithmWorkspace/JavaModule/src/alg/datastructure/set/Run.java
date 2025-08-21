@@ -10,7 +10,7 @@ public class Run {
 		School minsa = new School("민사고", "대전", "고등학교");
 		School multicampus = new School("멀티캠퍼스", "역삼", "아카데미");
 
-		_HashSet_P2<School> set = new _HashSet_P2<School>();
+		_HashSet_P3<School> set = new _HashSet_P3<School>();
 		set.add(seoulUniv);
 		set.add(yeonsaeUniv);
 		set.add(minsa);
