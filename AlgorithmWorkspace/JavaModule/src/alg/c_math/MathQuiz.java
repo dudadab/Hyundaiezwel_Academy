@@ -101,4 +101,6 @@ public class MathQuiz {
         res = i * res;
         return i * factorialTail(--i, res);
     }
+
 }
+

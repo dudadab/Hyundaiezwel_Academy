@@ -2,6 +2,7 @@ package coffeemanager.domain.order;
 
 import coffeemanager.domain.account.Account;
 import coffeemanager.domain.coffee.Coffee;
+import coffeemanager.domain.coffee.SeasonCoffee;
 import coffeemanager.domain.purchase.Purchase;
 
 import java.time.OffsetDateTime;
@@ -16,18 +17,8 @@ public class Order {
     private OrderStatus status;
 
     public static Order createOrder(Coffee coffee, int orderCnt) {
-
         Order order = new Order(coffee, orderCnt);
-
-        if(orderCnt > coffee.getStock()) {
-            Purchase purchase = new Purchase(coffee, orderCnt);
-            if(!purchase.proceed()) {
-                order.status = OrderStatus.FAIL_SOLD_OUT;
-                return order;
-            }
-        }
-
-        order.status = OrderStatus.OK;
+        order.status = OrderStatus.determinStatus(order);
         return order;
     }
 
